@@ -31,17 +31,20 @@ class FourthViewController: UIViewController, CNContactPickerDelegate {
         let picker = CNContactPickerViewController()
         picker.displayedPropertyKeys = [CNContactEmailAddressesKey]
         picker.predicateForEnablingContact = NSPredicate(format: "emailAddresses.@count > 0")
+        //### As noted in issue#1, using `phoneNumbers` does not work.
+//        picker.predicateForEnablingContact = NSPredicate(format: "phoneNumbers.@count > 0")
         picker.predicateForSelectionOfContact = NSPredicate(value: false) //default
         picker.predicateForSelectionOfProperty = NSPredicate(format: "key == 'emailAddresses'")
+//        picker.predicateForSelectionOfProperty = NSPredicate(format: "key == 'phoneNumbers'")
         picker.delegate = self
         
-        self.presentViewController(picker, animated: true, completion: nil)
+        self.present(picker, animated: true, completion: nil)
     }
     
     
     //#MARK: CNContactPickerDelegate methods
     
-    func contactPicker(picker: CNContactPickerViewController, didSelectContactProperties contactProperties: [CNContactProperty]) {
+    func contactPicker(_ picker: CNContactPickerViewController, didSelectContactProperties contactProperties: [CNContactProperty]) {
         let contactPropertiesCount = contactProperties.count
         self.resultLabel.text = "Picked \(contactPropertiesCount) contact email(s)"
     }

@@ -33,15 +33,15 @@ class FirstViewController: UIViewController, CNContactPickerDelegate {
 //        picker.predicateForSelectionOfContact = NSPredicate(format: "emailAddresses.@count == 1")
         picker.delegate = self
         
-        self.presentViewController(picker, animated: true, completion: nil)
+        self.present(picker, animated: true, completion: nil)
     }
     
     
     //#MARK: CNContactPickerDelegate methods
     
     // A selected contact is returned with this method.
-    func contactPicker(picker: CNContactPickerViewController, didSelectContact contact: CNContact) {
-        let contactName = CNContactFormatter.stringFromContact(contact, style: .FullName) ?? "No Name"
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+        let contactName = CNContactFormatter.string(from: contact, style: .fullName) ?? "No Name"
         self.resultLabel.text = "Picked \(contactName)"
     }
     

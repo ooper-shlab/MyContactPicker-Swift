@@ -30,24 +30,25 @@ class SecondViewController: UIViewController, CNContactPickerDelegate {
         picker.displayedPropertyKeys = [CNContactEmailAddressesKey]
         picker.predicateForEnablingContact = NSPredicate(format: "emailAddresses.@count > 0")
         picker.predicateForSelectionOfContact = NSPredicate(format: "emailAddresses.@count == 1")
+        //picker.predicateForSelectionOfProperty = NSPredicate(format: "key == 'emailAddresses'")
         picker.delegate = self
         
-        self.presentViewController(picker, animated: true, completion: nil)
+        self.present(picker, animated: true, completion: nil)
     }
     
     
     //#MARK: CNContactPickerDelegate methods
     
     // A selected contact is returned with this method.
-    func contactPicker(picker: CNContactPickerViewController, didSelectContact contact: CNContact) {
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
         assert(contact.emailAddresses.count == 1)
-        let emailAddress = (contact.emailAddresses[0].value as? String) ?? "no email address"
+        let emailAddress = contact.emailAddresses[0].value as String
         
         self.resultLabel.text = "Picked \(emailAddress)"
     }
     
     // A selected property is returned with this method.
-    func contactPicker(picker: CNContactPickerViewController, didSelectContactProperty contactProperty: CNContactProperty) {
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contactProperty: CNContactProperty) {
         let emailAddress = (contactProperty.value as? String) ?? "no email address"
         
         self.resultLabel.text = "Picked \(emailAddress)"

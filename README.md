@@ -12,7 +12,7 @@ Created by OOPer in cooperation with shlab.jp, on 2015/10/24.
 ===========================================================================
 BUILD REQUIREMENTS:
 
-Xcode 7.1, iOS SDK 9.1
+Xcode 8.2.1, iOS SDK 10
 
 ===========================================================================
 RUNTIME REQUIREMENTS:

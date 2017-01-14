@@ -29,20 +29,21 @@ class ThirdViewController: UIViewController, CNContactPickerDelegate {
     @IBAction func showPicker(_: AnyObject) {
         let picker = CNContactPickerViewController()
 //        picker.displayedPropertyKeys = [CNContactEmailAddressesKey] //no effect
+        //### Experimentally put here, specifying `predicateForEnablingContact` may not be needed.
         picker.predicateForEnablingContact = NSPredicate(format: "emailAddresses.@count > 0")
 //        picker.predicateForSelectionOfContact = NSPredicate(format: "emailAddresses.@count == 1") //no effect
         picker.delegate = self
         
-        self.presentViewController(picker, animated: true, completion: nil)
+        self.present(picker, animated: true, completion: nil)
     }
     
     
     //#MARK: CNContactPickerDelegate methods
-    
-    func contactPicker(picker: CNContactPickerViewController, didSelectContacts contacts: [CNContact]) {
+
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contacts: [CNContact]) {
         let contactsCount = contacts.count
         self.resultLabel.text = "Picked \(contactsCount) contact(s)"
     }
-    
+
     
 }
